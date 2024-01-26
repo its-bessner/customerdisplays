@@ -72,6 +72,5 @@ setSize &
 setScale &
 check &
 
-exit 0
 
 
