@@ -49,6 +49,15 @@ class mymodule::puppet_reboot_module {
 }
 
 
+class install_cron_module {
+  exec { 'install-cron-module':
+    path    => '/opt/puppetlabs/bin:/usr/bin:/usr/sbin',
+    command => 'puppet module install puppetlabs-cron_core',
+    unless  => 'puppet module list | grep cron_core',
+  }
+}
+
+
 
 class mymodule::cron{
   cron {'checkGit':
