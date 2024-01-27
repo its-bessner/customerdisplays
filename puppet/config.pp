@@ -36,3 +36,44 @@ cron { 'checkGit':
   user    => 'baydev',
   command => '/usr/bin/sleep 30; /home/baydev/checkGit.sh reboot'
 }
+
+# * * * * * cd /home/baydev && /home/baydev/autostart.sh
+cron {'autostart':
+user => 'baydev',
+  command => 'cd /home/baydev && /home/baydev/autostart.sh'
+}
+
+# * * * * * sleep 15 && cd /home/baydev && /home/baydev/autostart.sh
+cron {'autostart 15':
+  user => 'baydev',
+  command => 'sleep 15 && cd /home/baydev && /home/baydev/autostart.sh'
+}
+
+
+# * * * * * sleep 30 && cd /home/baydev && /home/baydev/autostart.sh
+cron {'autostart 30':
+  user => 'baydev',
+  command => 'sleep 30 && cd /home/baydev && /home/baydev/autostart.sh'
+}
+# * * * * * sleep 45 && cd /home/baydev && /home/baydev/autostart.sh
+cron {'autostart 45':
+  user => 'baydev',
+  command => 'sleep 45 && cd /home/baydev && /home/baydev/autostart.sh'
+}
+
+
+# 11 */3 * * * /home/baydev/refreshBrowser.sh
+cron {'refreshBrowser':
+  user => 'baydev',
+  minute => '11',
+  hour => '*/3',
+  command => '/home/baydev/refreshBrowser.sh'
+}
+
+# */5 * * * * cd /home/baydev && /home/baydev/screenshot.sh
+cron {'screenshot':
+  user => 'baydev',
+  minute => '*/5',
+  command => 'cd /home/baydev && /home/baydev/screenshot.sh'
+}
+
