@@ -6,5 +6,3 @@ if [ -n "$(git diff origin/master)" ]; then
   sudo puppet apply puppet/config.pp
   if [ -n "$1" ]; then sudo reboot; fi
 fi
-
-# update
