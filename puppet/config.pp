@@ -34,7 +34,6 @@
   # puppet module 'reboot'
   exec { 'install-reboot-module':
     command => 'puppet module install puppetlabs/reboot',
-    unless  => 'puppet module list | grep reboot',
     path    => ['/usr/bin', '/usr/sbin', '/usr/bin'],
   }
 
@@ -42,7 +41,6 @@
   exec { 'install-cron-module':
     path    => ['/opt/puppetlabs/bin', '/usr/bin', '/usr/sbin'],
     command => 'puppet module install puppetlabs-cron_core',
-    unless  => 'puppet module list | grep cron_core',
   }
 
 
