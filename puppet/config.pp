@@ -48,9 +48,12 @@ class mymodule::puppet_reboot_module {
   }
 }
 
-class mymodule::reboot_system {
-  reboot { 'reboot_after_run':
-    message => 'The system is going down for reboot now!',
-    when    => 'finished',
+
+
+class mymodule::cron{
+  cron {'checkGit':
+    special =>  'reboot',
+    user => 'baydev',
+    command => '/home/baydev/checkGit.sh'
   }
 }
