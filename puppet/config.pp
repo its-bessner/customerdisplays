@@ -14,7 +14,7 @@
   # Autologin on Desktop
   file { '/etc/lightdm/lightdm.conf':
     ensure  => 'file',
-    content => template('mymodule/lightdm.conf.erb'),
+    content => template('lightdm.conf'),
   }
 
   # Ensure git is present
