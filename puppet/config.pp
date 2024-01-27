@@ -63,6 +63,6 @@ class mymodule::cron{
   cron {'checkGit':
     special =>  'reboot',
     user => 'baydev',
-    command => '/home/baydev/checkGit.sh'
+    command => '/home/baydev/checkGit.sh reload'
   }
 }
