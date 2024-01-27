@@ -1,5 +1,5 @@
 #!/bin/bash
-# v103
+# v104
 
 git fetch origin master
 if [ -n "$(git diff origin/master)" ]; then
