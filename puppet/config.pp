@@ -35,7 +35,7 @@ class mymodule::boot_settings {
     ensure  => 'file',
     owner   => 'root',
     mode    => '0755',
-    content => template('mymodule/config.txt.erb'),
+    content => template('config.txt'),
   }
 }
 
