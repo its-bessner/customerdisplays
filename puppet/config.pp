@@ -36,8 +36,8 @@ package { 'mutt': ensure => 'installed' }
 
 # puppet module 'reboot'
 exec { 'install-reboot-module':
-  command => '/opt/puppetlabs/bin/puppet module install puppetlabs/reboot',
-  unless  => '/opt/puppetlabs/bin/puppet module list | grep reboot',
+  command => '/usr/bin/puppet module install puppetlabs/reboot',
+  unless  => '/usr/bin/puppet module list | grep reboot',
   path    => ['/bin', '/usr/sbin', '/usr/bin'],
 }
 
