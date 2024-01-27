@@ -40,7 +40,7 @@
 
 
   exec { 'install-cron-module':
-    path    => '/opt/puppetlabs/bin:/usr/bin:/usr/sbin',
+    path    => ['/opt/puppetlabs/bin', '/usr/bin', '/usr/sbin'],
     command => 'puppet module install puppetlabs-cron_core',
     unless  => 'puppet module list | grep cron_core',
   }
