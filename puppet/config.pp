@@ -41,4 +41,10 @@ exec { 'install-reboot-module':
   path    => ['/bin', '/usr/sbin', '/usr/bin'],
 }
 
+# reboot nescessary
+reboot { 'restart_computer':
+  message => 'System is rebooting now.',
+  when    => 'refreshed',
+}
+
 
