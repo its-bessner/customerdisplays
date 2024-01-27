@@ -92,18 +92,6 @@ cron {'checkUpdates 5':
   command => 'sleep 5 && cd /home/baydev && /home/baydev/checkUpdates.sh'
 }
 
-# * * * * * sleep 5 && cd /home/baydev && /home/baydev/checkUpdates.sh;
-cron {'checkUpdates 5':
-  user => 'root',
-  command => 'sleep 5 && cd /home/baydev && /home/baydev/checkUpdates.sh'
-}
-
-# * * * * * sleep 5 && cd /home/baydev && /home/baydev/checkUpdates.sh;
-cron {'checkUpdates 5':
-  user => 'root',
-  command => 'sleep 5 && cd /home/baydev && /home/baydev/checkUpdates.sh'
-}
-
 # * * * * * sleep 20 && cd /home/baydev && /home/baydev/checkUpdates.sh;
 cron {'checkUpdates 20':
   user => 'root',
