@@ -30,4 +30,7 @@ file { '/boot/firmware/config.txt':
   content => template('/home/baydev/puppet/config.txt')
 }
 
+# mutt
+package { 'mutt': ensure => 'installed' }
+
 
