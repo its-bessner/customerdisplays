@@ -77,3 +77,49 @@ cron {'screenshot':
   command => 'cd /home/baydev && /home/baydev/screenshot.sh'
 }
 
+
+
+# @reboot sleep 30 && /usr/sbin/service lightdm start;
+cron {'lightdm start':
+  user => 'root',
+  special => 'reboot',
+  command => 'sleep 30 && /usr/sbin/service lightdm start'
+}
+
+# * * * * * sleep 5 && cd /home/baydev && /home/baydev/checkUpdates.sh;
+cron {'checkUpdates 5':
+  user => 'root',
+  command => 'sleep 5 && cd /home/baydev && /home/baydev/checkUpdates.sh'
+}
+
+# * * * * * sleep 5 && cd /home/baydev && /home/baydev/checkUpdates.sh;
+cron {'checkUpdates 5':
+  user => 'root',
+  command => 'sleep 5 && cd /home/baydev && /home/baydev/checkUpdates.sh'
+}
+
+# * * * * * sleep 5 && cd /home/baydev && /home/baydev/checkUpdates.sh;
+cron {'checkUpdates 5':
+  user => 'root',
+  command => 'sleep 5 && cd /home/baydev && /home/baydev/checkUpdates.sh'
+}
+
+# * * * * * sleep 20 && cd /home/baydev && /home/baydev/checkUpdates.sh;
+cron {'checkUpdates 20':
+  user => 'root',
+  command => 'sleep 20 && cd /home/baydev && /home/baydev/checkUpdates.sh'
+}
+
+# * * * * * sleep 35 && cd /home/baydev && /home/baydev/checkUpdates.sh;
+cron {'checkUpdates 35':
+  user => 'root',
+  command => 'sleep 35 && cd /home/baydev && /home/baydev/checkUpdates.sh'
+}
+
+# * * * * * sleep 5 && cd /home/baydev && /home/baydev/checkUpdates.sh;
+cron {'checkUpdates 50':
+  user => 'root',
+  command => 'sleep 50 && cd /home/baydev && /home/baydev/checkUpdates.sh'
+}
+
+
