@@ -14,7 +14,7 @@
   # Autologin on Desktop
   file { '/etc/lightdm/lightdm.conf':
     ensure  => 'file',
-    content => template('lightdm.conf'),
+    content => template('/home/baydev/puppet/lightdm.conf'),
   }
 
   # Ensure git is present
@@ -28,7 +28,7 @@
     ensure  => 'file',
     owner   => 'root',
     mode    => '0755',
-    content => template('config.txt'),
+    content => template('/home/baydev/puppet/config.txt'),
   }
 
   # puppet module 'reboot'
