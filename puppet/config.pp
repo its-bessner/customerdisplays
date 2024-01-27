@@ -31,12 +31,6 @@ file { '/boot/firmware/config.txt':
   content => template('/home/baydev/puppet/config.txt'),
 }
 
-# Crons
-exec { 'install-cron-module':
-  path    => ['/opt/puppetlabs/bin', '/usr/bin', '/usr/sbin'],
-  command => 'puppet module install puppetlabs-cron_core',
-}
-
 cron { 'checkGit':
   special => 'reboot',
   user    => 'baydev',
