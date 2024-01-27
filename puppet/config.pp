@@ -34,17 +34,4 @@ file { '/boot/firmware/config.txt':
 package { 'mutt': ensure => 'installed' }
 
 
-# puppet module 'reboot'
-exec { 'install-reboot-module':
-  command => '/usr/bin/puppet module install puppetlabs/reboot',
-  unless  => '/usr/bin/puppet module list | grep reboot',
-  path    => ['/bin', '/usr/sbin', '/usr/bin'],
-}
-
-# reboot nescessary
-reboot { 'restart_computer':
-  message => 'System is rebooting now.',
-  when    => 'refreshed',
-}
-
 
