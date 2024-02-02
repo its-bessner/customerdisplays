@@ -121,28 +121,37 @@ cron {'check alive':
 
 #################
 
-package { 'mariadb-server': ensure => 'present' }
+class prepare_autolog_db {
+
+  package { 'mariadb-server': ensure => 'present' }
 
 
-mysql::db { 'log':
-  user     => 'raspi',
-  password => 'raspi',
-  host     => 'localhost',
-  require => [Package['mariadb-server']],
-  grant    => ['ALL']
+  mysql::db { 'log':
+    user     => 'raspi',
+    password => 'raspi',
+    host     => 'localhost',
+    require  => [Package['mariadb-server']],
+    grant    => ['ALL']
+  }
+
+  file { '/home/baydev/.my.cnf':
+    ensure  => 'file',
+    owner   => 'baydev',
+    mode    => '0600',
+    content => template('/home/baydev/puppet/.my.cnf')
+  }
+
+  exec { 'create log table':
+    path    => '/usr/bin',
+    command => 'mysql log < log.sql',
+    require => [Package['mariadb-server'], File['/home/baydev/.my.cnf'], Mysql::Db['log']],
+    cwd     => '/home/baydev'
+  }
+
 }
 
-file { '/home/baydev/.my.cnf':
-  ensure  => 'file',
-  owner   => 'baydev',
-  mode    => '0600',
-  content => template('/home/baydev/puppet/.my.cnf')
-}
+include prepare_autolog_db
 
-exec { 'create log table':
-  path    => '/usr/bin',
-  command => 'mysql log < log.sql',
-  require => [Package['mariadb-server'], File['/home/baydev/.my.cnf'],  Mysql::Db['log']],
-  cwd => '/home/baydev'
-}
+
+##############################
 
