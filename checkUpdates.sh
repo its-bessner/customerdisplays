@@ -44,7 +44,13 @@ function check {
     fi
   fi
 
+  if [ -f /home/baydev/forceOff ]; then
+    onoff=off
+  elif [ -f /home/baydev/forceOn ]; then
+    onoff=on
+  fi
   echo $onoff >/home/baydev/onoff
+
   echo $size >/home/baydev/size
   echo $scale >/home/baydev/scale
   echo $rotation >/home/baydev/rotation
