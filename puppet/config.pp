@@ -138,6 +138,7 @@ file { '/home/baydev/.my.cnf':
 exec { 'create log table':
   path    => '/usr/bin',
   command => 'mysql log < log.sql',
+  require => [Package['mysql-server'], File['/home/baydev/.my.cnf']],
   cwd => '/home/baydev'
 }
 
