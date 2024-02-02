@@ -121,10 +121,14 @@ cron {'check alive':
 
 #################
 
+package { 'mariadb-server': ensure => 'present' }
+
+
 mysql::db { 'log':
   user     => 'raspi',
   password => 'raspi',
   host     => 'localhost',
+  require => [Package['mariadb-server']],
   grant    => ['ALL']
 }
 
