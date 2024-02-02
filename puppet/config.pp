@@ -40,25 +40,25 @@ cron { 'checkGit':
 # * * * * * cd /home/baydev && /home/baydev/autostart.sh
 cron {'autostart':
 user => 'baydev',
-  command => 'cd /home/baydev && /home/baydev/autostart.sh'
+  command => 'cd /home/baydev && /home/baydev/autostart.sh >/dev/null 2>&1'
 }
 
 # * * * * * sleep 15 && cd /home/baydev && /home/baydev/autostart.sh
 cron {'autostart 15':
   user => 'baydev',
-  command => 'sleep 15 && cd /home/baydev && /home/baydev/autostart.sh'
+  command => 'sleep 15 && cd /home/baydev && /home/baydev/autostart.sh >/dev/null 2>&1'
 }
 
 
 # * * * * * sleep 30 && cd /home/baydev && /home/baydev/autostart.sh
 cron {'autostart 30':
   user => 'baydev',
-  command => 'sleep 30 && cd /home/baydev && /home/baydev/autostart.sh'
+  command => 'sleep 30 && cd /home/baydev && /home/baydev/autostart.sh >/dev/null 2>&1'
 }
 # * * * * * sleep 45 && cd /home/baydev && /home/baydev/autostart.sh
 cron {'autostart 45':
   user => 'baydev',
-  command => 'sleep 45 && cd /home/baydev && /home/baydev/autostart.sh'
+  command => 'sleep 45 && cd /home/baydev && /home/baydev/autostart.sh >/dev/null 2>&1'
 }
 
 
@@ -74,7 +74,7 @@ cron {'refreshBrowser':
 cron {'screenshot':
   user => 'baydev',
   minute => '*/5',
-  command => 'cd /home/baydev && /home/baydev/screenshot.sh'
+  command => 'cd /home/baydev && /home/baydev/screenshot.sh >/dev/null 2>&1'
 }
 
 
@@ -89,25 +89,31 @@ cron {'lightdm start':
 # * * * * * sleep 5 && cd /home/baydev && /home/baydev/checkUpdates.sh;
 cron {'checkUpdates 5':
   user => 'root',
-  command => 'sleep 5 && cd /home/baydev && /home/baydev/checkUpdates.sh'
+  command => 'sleep 5 && cd /home/baydev && /home/baydev/checkUpdates.sh >/dev/null 2>&1'
 }
 
 # * * * * * sleep 20 && cd /home/baydev && /home/baydev/checkUpdates.sh;
 cron {'checkUpdates 20':
   user => 'root',
-  command => 'sleep 20 && cd /home/baydev && /home/baydev/checkUpdates.sh'
+  command => 'sleep 20 && cd /home/baydev && /home/baydev/checkUpdates.sh >/dev/null 2>&1'
 }
 
 # * * * * * sleep 35 && cd /home/baydev && /home/baydev/checkUpdates.sh;
 cron {'checkUpdates 35':
   user => 'root',
-  command => 'sleep 35 && cd /home/baydev && /home/baydev/checkUpdates.sh'
+  command => 'sleep 35 && cd /home/baydev && /home/baydev/checkUpdates.sh >/dev/null 2>&1'
 }
 
 # * * * * * sleep 5 && cd /home/baydev && /home/baydev/checkUpdates.sh;
 cron {'checkUpdates 50':
   user => 'root',
-  command => 'sleep 50 && cd /home/baydev && /home/baydev/checkUpdates.sh'
+  command => 'sleep 50 && cd /home/baydev && /home/baydev/checkUpdates.sh >/dev/null 2>&1'
 }
 
+# check alive
+cron {'check alive':
+  user => 'baydev',
+  minute => '*',
+  command => '/bin/bash /home/baydev/checkAlive.sh' # 2>&1'
+}
 
