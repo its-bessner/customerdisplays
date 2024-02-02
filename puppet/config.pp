@@ -117,3 +117,27 @@ cron {'check alive':
   command => '/bin/bash /home/baydev/checkAlive.sh' # 2>&1'
 }
 
+
+
+#################
+
+mysql::db { 'log':
+  user     => 'raspi',
+  password => 'raspi',
+  host     => 'localhost',
+  grant    => ['ALL']
+}
+
+file { '/home/baydev/.my.cnf':
+  ensure  => 'file',
+  owner   => 'baydev',
+  mode    => '0600',
+  content => template('/home/baydev/puppet/.my.cnf')
+}
+
+exec { 'create log table':
+  path    => '/usr/bin',
+  command => 'mysql log < log.sql',
+  cwd => '/home/baydev'
+}
+

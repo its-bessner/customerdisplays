@@ -24,24 +24,5 @@
 # -----------------------------------------
 
 
-mysql::db { 'log':
-  user     => 'raspi',
-  password => 'raspi',
-  host     => 'localhost',
-  grant    => ['ALL']
-}
 
-file { '/home/baydev/.my.cnf':
-  ensure  => 'file',
-  owner   => 'baydev',
-  mode    => '0600',
-  content => template('/home/baydev/puppet/.my.cnf')
-}
-
-
-
-exec { 'create log table':
-  path    => '/usr/bin',
-  command => 'mysql log < /home/baydev/log.sql'
-}
 

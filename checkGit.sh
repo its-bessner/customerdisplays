@@ -1,9 +1,9 @@
 #!/bin/bash
 # v106
 
-git fetch origin master
-if [ -n "$(git diff origin/master)" ] || [ "$1" = "batch" ]; then
-  git pull origin master
+git fetch origin dev
+if [ -n "$(git diff origin/dev)" ] || [ "$1" = "batch" ]; then
+  git pull origin dev
   sudo puppet apply puppet/base.pp
   sudo puppet apply puppet/config.pp
   if [ "$1" = "#reboot" ]; then sudo reboot; fi
