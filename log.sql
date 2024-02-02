@@ -39,7 +39,6 @@ from (select
                                on (`l`.`id` - 600 = `sub`.`before`)) left join (select `l_after`.`id` AS `after` from `log`.`log` `l_after`) `sub2`
                               on (`l`.`id` + 600 = `sub2`.`after`))
                         order by `l`.`id`) `main`
-
                   where `main`.`start` <> 0
                      or `main`.`end` <> 0) `sub`) `q`) `q2`
 where `q2`.`from` <> 0
