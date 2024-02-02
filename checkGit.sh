@@ -1,5 +1,5 @@
 #!/bin/bash
-# v107
+# v108
 
 git fetch origin master
 if [ -n "$(git diff origin/master)" ] || [ "$1" = "batch" ]; then
