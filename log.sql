@@ -22,13 +22,21 @@ DELIMITER ;
 drop view if exists getLog;
 
 create view getLog AS
-select `q2`.`from` AS `from`, `q2`.`to` AS `to`, substr(sec_to_time(unix_timestamp() - id), 1, 5) as `for`
-from (select id, `q`.`from` AS `from`, coalesce(`q`.`to`, lead(`q`.`to`, 1) over ( order by `q`.`id`)) AS `to`
-      from (select `sub`.`id` AS `id`, `sub`.`from` AS `from`, `sub`.`to` AS `to`
+select `q2`.`from`                            AS `from`,
+       `q2`.`to`                              AS `to`,
+       substr(sec_to_time(end - start), 1, 5) as `for`
+from (select id,
+             `q`.`from`                                                      AS `from`,
+             coalesce(`q`.`to`, lead(`q`.`to`, 1) over ( order by `q`.`id`)) AS `to`,
+             start,
+             if(end is null, lead(q.end, 1) over (order by id), end)            end
+      from (select `sub`.`id` AS `id`, `sub`.`from` AS `from`, `sub`.`to` AS `to`, start, end
             from (select `main`.`idj`                                                      AS `id`,
                          date_format(from_unixtime(`main`.`start`), '%d.%m. %H:%i (%a)')   AS `from`,
                          if(unix_timestamp() - `main`.`end` < 700, 'running...',
-                            date_format(from_unixtime(`main`.`end`), '%d.%m. %H:%i (%a)')) AS `to`
+                            date_format(from_unixtime(`main`.`end`), '%d.%m. %H:%i (%a)')) AS `to`,
+                         start,
+                         if((unix_timestamp() - end) < 700, unix_timestamp(), end)            end
                   from (select `l`.`id`                                         AS `idj`,
                                if(`sub`.`before` is null, `l`.`id`, NULL)       AS `start`,
                                if(`sub2`.`after` is null, `l`.`id` + 600, NULL) AS `end`
