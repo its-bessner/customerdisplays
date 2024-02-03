@@ -6,8 +6,8 @@
 # batch as first param: apply puppet manifests even if there are no changes from local to remote branch
 # No Param at all: just apply the manifest
 
-if [ -n "$(git remote show origin 2>/dev/null | grep 'master' | grep 'out of date')" ] || [ "$1" = 'batch' ]; then
-  git pull origin master
+if [ -n "$(git remote show origin 2>/dev/null | grep 'dev' | grep 'out of date')" ] || [ "$1" = 'batch' ]; then
+  git pull origin dev
   sudo puppet apply puppet/base.pp
   sudo puppet apply puppet/config.pp
   if [ "$1" = "reboot" ]; then sudo reboot; fi
