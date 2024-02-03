@@ -22,16 +22,13 @@ DELIMITER ;
 drop view if exists getLog;
 
 create view getLog AS
-select `q2`.`from` AS `from`, `q2`.`to` AS `to`
-from (select
-          `q`.`from`                                                      AS `from`,
-          coalesce(`q`.`to`, lead(`q`.`to`, 1) over ( order by `q`.`id`)) AS `to`
-      from (select `sub`.`id`    AS `id`,
-                   `sub`.`from`  AS `from`,
-                   `sub`.`to`    AS `to`
-            from (select `main`.`idj`                                                                         AS `id`,
-                         date_format(from_unixtime(`main`.`start`), '%d.%m. %H:%i (%a)')                                                        AS `from`,
-                         if(unix_timestamp() - `main`.`end` < 700, 'running...', date_format(from_unixtime(`main`.`end`),'%d.%m. %H:%i (%a)')) AS `to`
+select `q2`.`from` AS `from`, `q2`.`to` AS `to`, substr(sec_to_time(unix_timestamp() - id), 1, 5) as `for`
+from (select id, `q`.`from` AS `from`, coalesce(`q`.`to`, lead(`q`.`to`, 1) over ( order by `q`.`id`)) AS `to`
+      from (select `sub`.`id` AS `id`, `sub`.`from` AS `from`, `sub`.`to` AS `to`
+            from (select `main`.`idj`                                                      AS `id`,
+                         date_format(from_unixtime(`main`.`start`), '%d.%m. %H:%i (%a)')   AS `from`,
+                         if(unix_timestamp() - `main`.`end` < 700, 'running...',
+                            date_format(from_unixtime(`main`.`end`), '%d.%m. %H:%i (%a)')) AS `to`
                   from (select `l`.`id`                                         AS `idj`,
                                if(`sub`.`before` is null, `l`.`id`, NULL)       AS `start`,
                                if(`sub2`.`after` is null, `l`.`id` + 600, NULL) AS `end`
@@ -41,5 +38,5 @@ from (select
                         order by `l`.`id`) `main`
                   where `main`.`start` <> 0
                      or `main`.`end` <> 0) `sub`) `q`) `q2`
-where `q2`.`from` <> 0
+where `q2`.`from` <> 0;
 
