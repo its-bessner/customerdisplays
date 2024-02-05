@@ -38,8 +38,8 @@ function check {
       echo $token >/home/baydev/update_token
       if [[ "$token" =~ "restart" ]]; then
         sudo reboot
-        elif [[ "$token" =~ "reload" ]]; then
-          /bin/bash /home/baydev/refreshBrowser.sh
+      elif [[ "$token" =~ "reload" ]]; then
+       su baydev /home/baydev/refreshBrowser.sh
       else
         sudo service lightdm restart
       fi
