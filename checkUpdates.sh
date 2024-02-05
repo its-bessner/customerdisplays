@@ -5,7 +5,7 @@ cd /home/baydev || exit
 function check {
 
   id=$(cat /home/baydev/id)
-  ip=$(/usr/sbin/ifconfig | grep -oP "inet 192(\\.[0-9]+){3}" | grep -oP "192(\\.[0-9]+){3}" | grep 108 | head -n1)
+  ip=$(/usr/sbin/ifconfig | grep -Po "^\s+inet \K192\.\d+\.\d+\.\d+" | paste -s -d "+")
   request=https://www.bayerwaldhof.de/guestdisplays.html?screen_target=$id\&ip=$ip
   answer=$(curl -c cookies.txt -b cookies.txt $request)
   url=$(echo $answer | jq .url | sed 's/"//g')
