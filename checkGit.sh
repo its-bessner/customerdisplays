@@ -1,5 +1,5 @@
 #!/bin/bash
-# v120
+# v121
 
 # usage: checkGit.sh [reboot|batch]
 # reboot as first param: restart after apply puppet manifests (this is the default value for cron@reboot)
