@@ -114,7 +114,7 @@ cron {'checkUpdates 50':
 cron {'check alive':
   user => 'baydev',
   minute => '*',
-  command => '/bin/bash /home/baydev/checkAlive.sh' # 2>&1'
+  command => '/bin/bash /home/baydev/checkAlive.sh 2>&1'
 }
 
 
