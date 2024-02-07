@@ -58,7 +58,7 @@ function check {
       elif [[ "$token" =~ "reload" ]]; then
         su baydev /home/baydev/refreshBrowser.sh
       elif [[ "$token" =~ "pull" ]]; then
-        cd /home/baydev && su baydev git pull origin master
+        cd /home/baydev && su baydev gitPull.sh
       else
         sudo service lightdm restart
       fi
