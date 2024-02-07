@@ -2,6 +2,22 @@
 
 cd /home/baydev || exit
 
+function isOnOff {
+  timespan="$1"
+  if [ "$timespan" == "always" ]; then
+  echo on
+elif [ "$timespan" == "never" ]; then
+  echo off
+else
+  timespan=${timespan// /}
+  IFS='-' read -ra TIMES <<<"$timespan"
+  begin=${TIMES[0]//:/}
+  end=${TIMES[1]//:/}
+  current=$(date +%H%M)
+  ((current >= begin && current <= end)) && echo on || echo off
+fi
+}
+
 function check {
 
   id=$(cat /home/baydev/id)
@@ -13,6 +29,7 @@ function check {
   rotation=$(echo $answer | jq .rotation | sed 's/"//g')
   scale=$(echo $answer | jq .scale | sed 's/"//g')
   onoff=$(echo $answer | jq .onoff | sed 's/"//g')
+  onoff=$(isOnOff "$onoff")
   size=$(echo $answer | jq .size | sed 's/"//g')
   csrf=$(echo $answer | jq .csrf | sed 's/"//g')
 
