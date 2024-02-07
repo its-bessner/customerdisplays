@@ -5,17 +5,17 @@ cd /home/baydev || exit
 function isOnOff {
   timespan="$1"
   if [ "$timespan" == "always" ]; then
-  echo on
-elif [ "$timespan" == "never" ]; then
-  echo off
-else
-  timespan=${timespan// /}
-  IFS='-' read -ra TIMES <<<"$timespan"
-  begin=${TIMES[0]//:/}
-  end=${TIMES[1]//:/}
-  current=$(date +%H%M)
-  ((current >= begin && current <= end)) && echo on || echo off
-fi
+    echo on
+  elif [ "$timespan" == "never" ]; then
+    echo off
+  else
+    timespan=${timespan// /}
+    IFS='-' read -ra TIMES <<<"$timespan"
+    begin=${TIMES[0]//:/}
+    end=${TIMES[1]//:/}
+    current=$(date +%H%M)
+    ((current >= begin && current <= end)) && echo on || echo off
+  fi
 }
 
 function check {
@@ -56,9 +56,9 @@ function check {
       if [[ "$token" =~ "restart" ]]; then
         sudo reboot
       elif [[ "$token" =~ "reload" ]]; then
-       su baydev /home/baydev/refreshBrowser.sh
-       elif [[ "$token" =~ "pull" ]]; then
-         cd /home/baydev && git pull origin master
+        su baydev /home/baydev/refreshBrowser.sh
+      elif [[ "$token" =~ "pull" ]]; then
+        cd /home/baydev && su baydev git pull origin master
       else
         sudo service lightdm restart
       fi
