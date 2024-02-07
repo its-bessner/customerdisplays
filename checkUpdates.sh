@@ -14,6 +14,9 @@ function isOnOff {
     begin=${TIMES[0]//:/}
     end=${TIMES[1]//:/}
     current=$(date +%H%M)
+    begin=$((10#$begin))
+    current=$((10#$current))
+    end=$((10#$end))
     ((current >= begin && current <= end)) && echo on || echo off
   fi
 }
@@ -30,6 +33,7 @@ function check {
   scale=$(echo $answer | jq .scale | sed 's/"//g')
   onoff=$(echo $answer | jq .onoff | sed 's/"//g')
   onoff=$(isOnOff "$onoff")
+  echo "onoff: $onoff";
   size=$(echo $answer | jq .size | sed 's/"//g')
   csrf=$(echo $answer | jq .csrf | sed 's/"//g')
 
