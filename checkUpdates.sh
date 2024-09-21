@@ -40,7 +40,8 @@ function check {
 
    # Bail out if the URL can't be parsed
    if [ -z "$url" ]; then
-    exit -1
+    echo "shit"
+    exit 0
    fi
 
   tokenOld=$(cat /home/baydev/update_token)
