@@ -26,7 +26,7 @@ function check {
   id=$(cat /home/baydev/id)
   ip=$(/usr/sbin/ifconfig | grep -Po "^\s+inet \K192\.\d+\.\d+\.\d+" | paste -s -d "+")
   request=https://www.bayerwaldhof.de/guestdisplays.html?screen_target=$id\&ip=$ip
-  answer=$(curl -c cookies.txt -b cookies.txt $request)
+  answer=$(curl -L -c cookies.txt -b cookies.txt $request)
   url=$(echo $answer | jq .url | sed 's/"//g')
   token=$(echo $answer | jq .update_token | sed 's/"//g')
   rotation=$(echo $answer | jq .rotation | sed 's/"//g')
@@ -36,6 +36,10 @@ function check {
   echo "onoff: $onoff";
   size=$(echo $answer | jq .size | sed 's/"//g')
   csrf=$(echo $answer | jq .csrf | sed 's/"//g')
+
+   if [ -z "$url" ]; then
+    exit -1
+   fi
 
   tokenOld=$(cat /home/baydev/update_token)
   echo "-----------------------------"
