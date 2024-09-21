@@ -38,7 +38,7 @@ function check {
   csrf=$(echo $answer | jq .csrf | sed 's/"//g')
 
 
-   // Bail out if the URL can't be parsed
+   # Bail out if the URL can't be parsed
    if [ -z "$url" ]; then
     exit -1
    fi
