@@ -1,6 +1,12 @@
 
 package { 'mariadb-server': ensure => 'present' }
 
+# apt update
+exec { 'update_package_sources':
+  command => '/usr/bin/apt-get update',
+  path    => ['/usr/bin', '/usr/sbin'],
+}
+
 # Crons
 exec { 'install-cron-module':
   path    => ['/opt/puppetlabs/bin', '/usr/bin', '/usr/sbin'],
