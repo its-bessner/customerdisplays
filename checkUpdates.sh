@@ -25,7 +25,9 @@ function check {
 
   id=$(cat /home/baydev/id)
   ip=$(/usr/sbin/ifconfig | grep -Po "^\s+inet \K192\.\d+\.\d+\.\d+" | paste -s -d "+")
-  request=https://www.bayerwaldhof.de/guestdisplays.html?screen_target=$id\&ip=$ip
+  eth=$(ip link show eth0 | tail -n 1 | awk '{ print $2 }')
+  request=https://www.bayerwaldhof.de/guestdisplays.html?screen_target=$id\&ip=$ip\&eth=$eth
+  echo Request: $request
   answer=$(curl -L -c cookies.txt -b cookies.txt $request)
   url=$(echo $answer | jq .url | sed 's/"//g')
   token=$(echo $answer | jq .update_token | sed 's/"//g')

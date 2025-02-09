@@ -43,14 +43,16 @@ function setOnOff {
 function check {
 
   ## Chromium not running? Start it!
-  if [ "$(ps aux | grep chromium-browser | wc -l)" -lt "2" ]; then
+  # if [ "$(ps aux | grep chromium-browser | wc -l)" -lt "2" ]; then
+  if [ "$(ps aux | grep chromium | wc -l)" -lt "2" ]; then
     unclutter &
     chromium-browser "$(cat /home/baydev/url)" \
       --start-fullscreen \
       --kiosk \
-      --incognito \
       --noerrdialogs \
       --disable-translate \
+      --accept-lang=lang-de \
+      --lang=language-de \
       --no-first-run \
       --fast \
       --fast-start \
@@ -58,9 +60,13 @@ function check {
       --disable-features=TranslateUI \
       --disk-cache-dir=/dev/null \
       --overscroll-history-navigation=0 \
-      --disable-pinch &
+      --disable-pinch \
+      --incognito &
     disown
   fi
+  sleep 10
+  xdotool mousemove 0 0
+  xdotool click 1
 
 }
 
